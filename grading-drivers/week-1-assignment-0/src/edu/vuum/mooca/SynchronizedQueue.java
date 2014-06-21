@@ -220,20 +220,29 @@ public class SynchronizedQueue {
             // initialization below to create two Java Threads, one
             // that's passed the producerRunnable and the other that's
             // passed the consumerRunnable.
+<<<<<<< HEAD
             Thread consumer = new Thread(consumerRunnable);
             Thread producer = new Thread(producerRunnable);
+=======
+            Thread consumer = null;
+            Thread producer = null;
+>>>>>>> upstream/master
 
             // TODO - you fill in here to start the threads. More
             // interesting results will occur if you start the
             // consumer first.
+<<<<<<< HEAD
             consumer.start();
             producer.start();
+=======
+>>>>>>> upstream/master
             
             // Give the Threads a chance to run before interrupting
             // them.
             Thread.sleep(100);
 
             // TODO - you fill in here to interrupt the threads.
+<<<<<<< HEAD
             consumer.interrupt();
             producer.interrupt();
 
@@ -241,6 +250,11 @@ public class SynchronizedQueue {
             // exit.
             consumer.join();
             producer.join();
+=======
+
+            // TODO - you fill in here to wait for the threads to
+            // exit.
+>>>>>>> upstream/master
             
             // Do some sanity checking to see if the Threads work as
             // expected.
