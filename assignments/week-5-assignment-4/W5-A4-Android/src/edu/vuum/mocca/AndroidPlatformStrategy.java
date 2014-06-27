@@ -47,7 +47,7 @@ public class AndroidPlatformStrategy extends PlatformStrategy
     {
         /** (Re)initialize the CountDownLatch. */
         // TODO - You fill in here.
-    	mLatch = new CountDownLatch(2);
+    	mLatch = new CountDownLatch(NUMBER_OF_THREADS);
     }
 
     /** Print the outputString to the display. */
@@ -85,12 +85,6 @@ public class AndroidPlatformStrategy extends PlatformStrategy
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
-
-    /** Returns the platform name in a String. */
-    public String platformName() 
-    {
-        return System.getProperty("java.specification.vendor");
     }
 
     /** 
