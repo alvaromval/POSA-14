@@ -44,7 +44,11 @@ public class ThreadPoolDownloadService extends Service {
      * Hook method called when the Service is created.
      */
     @Override
+<<<<<<< HEAD
 	public void onCreate() {
+=======
+    public void onCreate() {
+>>>>>>> upstream/master
         // TODO - You fill in here to replace null with a new
         // FixedThreadPool Executor that's configured to use
         // MAX_THREADS. Use a factory method in the Executors class.
@@ -82,7 +86,11 @@ public class ThreadPoolDownloadService extends Service {
      * the proper Intent.
      */
     @Override
+<<<<<<< HEAD
 	public int onStartCommand(final Intent intent,
+=======
+    public int onStartCommand(final Intent intent,
+>>>>>>> upstream/master
                               int flags,
                               int startId) {
         // TODO - You fill in here to replace null with a new Runnable

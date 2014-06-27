@@ -121,8 +121,12 @@ public class DownloadUtils {
     
     /**
      * Download a file to the Android file system, then respond with
+<<<<<<< HEAD
      * the file location using the provided Messenger.  Hint: use the
      * other methods in this class
+=======
+     * the file location using the provided Messenger. 
+>>>>>>> upstream/master
      */
     public static void downloadAndRespond(Context context,
                                           Uri uri,

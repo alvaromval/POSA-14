@@ -65,7 +65,11 @@ public class DownloadActivity extends DownloadBase {
     	
     	// Handle any messages that get sent to this Handler
     	@Override
+<<<<<<< HEAD
 		public void handleMessage(Message msg) {
+=======
+        public void handleMessage(Message msg) {
+>>>>>>> upstream/master
     		
             // Get an actual reference to the DownloadActivity
             // from the WeakReference.
@@ -108,7 +112,11 @@ public class DownloadActivity extends DownloadBase {
             // DownloadIntentService with the appropriate Intent
             // returned from the makeIntent() factory method.
 
+<<<<<<< HEAD
             which = "Starting IntentService";
+=======
+            which = "Starting DownloadIntentService";
+>>>>>>> upstream/master
             break;
         
         case R.id.thread_pool_button:
