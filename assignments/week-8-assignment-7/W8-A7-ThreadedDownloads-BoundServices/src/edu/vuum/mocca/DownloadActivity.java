@@ -76,7 +76,7 @@ public class DownloadActivity extends DownloadBase {
                 // service parameter into an interface that can be
                 // used to make RPC calls to the Service.
 
-                mDownloadCall = null;
+                mDownloadCall = DownloadCall.Stub.asInterface(service);
             }
 
             /**
@@ -109,7 +109,7 @@ public class DownloadActivity extends DownloadBase {
                 // service parameter into an interface that can be
                 // used to make RPC calls to the Service.
 
-                mDownloadRequest = null;
+                mDownloadRequest = DownloadRequest.Stub.asInterface(service);
             }
 
             /**
@@ -145,7 +145,15 @@ public class DownloadActivity extends DownloadBase {
                 // sendPath().  Please use displayBitmap() defined in
                 // DownloadBase.
 
-                Runnable displayRunnable = null;
+                Runnable displayRunnable = new Runnable() {
+					
+					@Override
+					public void run() {
+						displayBitmap(imagePathname);
+					}
+				};
+				runOnUiThread(displayRunnable);
+				
             }
         };
      
@@ -162,12 +170,27 @@ public class DownloadActivity extends DownloadBase {
         case R.id.bound_sync_button:
             // TODO - You fill in here to use mDownloadCall to
             // download the image & then display it.
+        	if(getDownloadCall() != null) {
+        		try {
+        			String pathname = getDownloadCall().downloadImage(uri);
+        			displayBitmap(pathname);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+        	}
             break;
 
         case R.id.bound_async_button:
             // TODO - You fill in here to call downloadImage() on
             // mDownloadRequest, passing in the appropriate Uri and
             // callback.
+        	if(getDownloadRequest() != null && getDownloadCallback() != null) {
+        		try {
+					getDownloadRequest().downloadImage(uri, getDownloadCallback());
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+        	}
             break;
         }
     }

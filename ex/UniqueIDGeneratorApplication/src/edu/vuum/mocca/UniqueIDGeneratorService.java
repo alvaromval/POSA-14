@@ -15,7 +15,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 /**
  * @class UniqueIDGeneratorService
@@ -41,24 +40,14 @@ public class UniqueIDGeneratorService extends Service {
     private final int MAX_THREADS = 4;
 	
     /**
-<<<<<<< HEAD
-     * The ExecutorService that references a ThreadPool.
-=======
      * The ExecutorService implementation that references a
      * ThreadPool.
->>>>>>> upstream/master
      */
     private ExecutorService mExecutor;
 
     /**
-<<<<<<< HEAD
-     * A persistent collection of unique IDs.  For simplicity we use a
-     * SharedPreference, which isn't optimized for performance but is
-     * easy to use.
-=======
      * A collection of unique IDs implemented internally using a
      * persistent Java HashMap.
->>>>>>> upstream/master
      */
     private SharedPreferences uniqueIDs = null;
 
@@ -95,16 +84,6 @@ public class UniqueIDGeneratorService extends Service {
         // Create the Intent that's associated to the
         // UniqueIDGeneratorService class.
         return new Intent(context, 
-<<<<<<< HEAD
-        				  UniqueIDGeneratorService.class);
-    }
-
-    /**
-     * Extracts the encapsulated unique ID from the Message.
-     */
-    public static String uniqueID(Message message) {
-        return message.getData().getString("ID");
-=======
                           UniqueIDGeneratorService.class);
     }
 
@@ -113,7 +92,6 @@ public class UniqueIDGeneratorService extends Service {
      */
     public static String uniqueID(Message replyMessage) {
         return replyMessage.getData().getString("ID");
->>>>>>> upstream/master
     }
 
     /**
@@ -123,12 +101,6 @@ public class UniqueIDGeneratorService extends Service {
      *        UniqueIDGeneratorActivity.
      */
     private class RequestHandler extends Handler {
-<<<<<<< HEAD
-
-        // Hook method called back when a request Message arrives from
-        // the UniqueIDGeneratorActivity.  The message it receives contains
-        // the Messenger used to reply to the Activity.
-=======
         /**
          * Return a Message containing an ID that's unique
          * system-wide.
@@ -164,69 +136,12 @@ public class UniqueIDGeneratorService extends Service {
         // Hook method called back when a request Message arrives from
         // the UniqueIDGeneratorActivity.  The message it receives
         // contains the Messenger used to reply to the Activity.
->>>>>>> upstream/master
         public void handleMessage(Message request) {
 
             // Store the reply Messenger so it doesn't change out from
             // underneath us.
             final Messenger replyMessenger = request.replyTo;
 
-<<<<<<< HEAD
-            // Runnable that's used to generate a unique ID in the
-            // thread pool.
-            Runnable idGeneratorRunnable = new Runnable() {
-                    public void run () {
-                        String uniqueID;
-
-                        // We need to synchronize this block of code
-                        // since it's accessed by multiple threads in
-                        // the pool.
-                        synchronized (this) {
-                            // This look keep generating a random UUID
-                            // if it's not unique (i.e., is not
-                            // currently found in the persistent
-                            // collection of SharedPreferences).  The
-                            // likelihood of a non-unique UUID is low,
-                            // but we're being extra paranoid for the
-                            // sake of this example ;-)
-                            for (;;) {
-                                uniqueID = UUID.randomUUID().toString();
-
-                                if (uniqueIDs.getInt(uniqueID,
-                                                      0) == 1)
-                                    Log.d(TAG, uniqueID + " already in use");
-                                else {
-                                    Log.d(TAG, uniqueID + " not in use");
-                                    break;
-                                }
-                            }
-
-                            // We found a unique ID, so add it as the
-                            // "key" to the persistent collection of
-                            // SharedPreferences, with a value of 1 to
-                            // indicate this ID is already "used".
-                            SharedPreferences.Editor editor = uniqueIDs.edit();
-                            editor.putInt(uniqueID, 1);
-                            editor.commit();
-                        }
-
-                        // Create a Message that's used to send the
-                        // unique ID back to the UniqueIDGeneratorActivity.
-                        Message reply = Message.obtain();
-                        Bundle data = new Bundle();
-                        data.putString("ID", uniqueID);
-                        reply.setData(data);
-
-                        try {
-                            // Send the reply back to the
-                            // UniqueIDGeneratorActivity.
-                            if (replyMessenger == null)
-                                Log.d(TAG, "replyMessenger is null");
-                            else {
-                                Log.d(TAG, "sending unique ID" + uniqueID);
-                                replyMessenger.send(reply);
-                            }
-=======
             // Put a runnable that generates a unique ID into the
             // thread pool for subsequent concurrent processing.
             mExecutor.execute(new Runnable() {
@@ -238,20 +153,11 @@ public class UniqueIDGeneratorService extends Service {
                             // Send the reply back to the
                             // UniqueIDGeneratorActivity.
                             replyMessenger.send(reply);
->>>>>>> upstream/master
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
                     }
-<<<<<<< HEAD
-                };
-
-            // Put the runnable in the thread pool for subsequent
-            // concurrent processing.
-            mExecutor.execute(idGeneratorRunnable);
-=======
                 });
->>>>>>> upstream/master
         }
     }
 
@@ -268,13 +174,10 @@ public class UniqueIDGeneratorService extends Service {
         mExecutor.shutdown();
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Factory method that returns the underlying IBinder associated
      * with the Request Messenger.
      */
->>>>>>> upstream/master
     @Override
     public IBinder onBind(Intent intent) {
         return mReqMessenger.getBinder();

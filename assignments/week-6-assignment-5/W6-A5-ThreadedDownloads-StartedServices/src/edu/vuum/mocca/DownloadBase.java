@@ -46,11 +46,7 @@ public class DownloadBase extends Activity {
     private ImageView mImageView;
 
     /**
-<<<<<<< HEAD
-     * The original bitmap (used for reseting the image).
-=======
      * The original bitmap (used for resetting the image).
->>>>>>> upstream/master
      */
     private Bitmap mDefaultBitmap;
     

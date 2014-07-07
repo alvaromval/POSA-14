@@ -50,12 +50,15 @@
         </activity>
         
         <!-- THIS IS THE SOUND RECORD ACTIVITY -->
+        <!--  Setting an intent-filter sets the android:exported attribute to true by default, 
+		a solution is to set android:exported to false or remove the intent-filter-->
         <activity
             android:name="edu.vuum.mocca.ui.SoundRecordActivity"
-            android:label="@string/title_activity_sound_record">
+            android:label="@string/title_activity_sound_record" android:exported="false">
             <intent-filter> 										<!-- Line 56 -->
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
             </intent-filter>
+			
         </activity>
         
     </application>

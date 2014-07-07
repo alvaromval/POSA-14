@@ -79,15 +79,12 @@ public class AndroidPlatformStrategy extends PlatformStrategy
     public void awaitDone()
     {
         // TODO - You fill in here.
-<<<<<<< HEAD
     	try {
 			mLatch.await();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-=======
->>>>>>> upstream/master
     }
 
     /** 

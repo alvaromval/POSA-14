@@ -2,6 +2,7 @@ package edu.vuum.mocca;
 
 import java.lang.ref.WeakReference;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -65,11 +66,7 @@ public class DownloadActivity extends DownloadBase {
     	
     	// Handle any messages that get sent to this Handler
     	@Override
-<<<<<<< HEAD
-		public void handleMessage(Message msg) {
-=======
         public void handleMessage(Message msg) {
->>>>>>> upstream/master
     		
             // Get an actual reference to the DownloadActivity
             // from the WeakReference.
@@ -82,6 +79,7 @@ public class DownloadActivity extends DownloadBase {
                 // bitmap that's been downloaded and returned to
                 // the DownloadActivity as a pathname who's Bundle
             	// key is defined by DownloadUtils.PATHNAME_KEY
+            	activity.displayBitmap(msg.getData().getString(DownloadUtils.PATHNAME_KEY));
             }
     	}
     }
@@ -111,19 +109,17 @@ public class DownloadActivity extends DownloadBase {
             // TODO - You fill in here to start the
             // DownloadIntentService with the appropriate Intent
             // returned from the makeIntent() factory method.
-
-<<<<<<< HEAD
-            which = "Starting IntentService";
-=======
+        	Intent service = DownloadIntentService.makeIntent(view.getContext(), handler, getUrlString());
+        	startService(service);
             which = "Starting DownloadIntentService";
->>>>>>> upstream/master
             break;
         
         case R.id.thread_pool_button:
             // TODO - You fill in here to start the
             // ThreadPoolDownloadService with the appropriate Intent
             // returned from the makeIntent() factory method.
-
+        	Intent servicePool = ThreadPoolDownloadService.makeIntent(view.getContext(), handler, getUrlString());
+        	startService(servicePool);
             which = "Starting ThreadPoolDownloadService";
             break;
         
